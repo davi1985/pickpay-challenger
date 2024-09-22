@@ -5,7 +5,7 @@ import org.springframework.http.ProblemDetail;
 
 public class WallerDataAlreadyExistsException extends PickPayException {
 
-    private String detail;
+    private final String detail;
 
     public WallerDataAlreadyExistsException(String detail) {
         this.detail = detail;
