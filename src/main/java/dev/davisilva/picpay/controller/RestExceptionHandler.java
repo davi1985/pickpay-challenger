@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class RestExceptionHandler {
 
     @ExceptionHandler(PickPayException.class)
-    public ProblemDetail hadlePickPayException(PickPayException e) {
+    public ProblemDetail handlePickPayException(PickPayException e) {
         return e.toProblemDetails();
     }
 }
