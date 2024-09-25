@@ -15,9 +15,9 @@ public class WalletService {
     }
 
     public Wallet create(CreateWalletDto dto) {
-        var walletDb = walletRepository.findByCpfCnpjOrEmail(dto.cpfCnpj(), dto.email());
+        var walletByCpfCnpjOrEmailAlreadyExists = walletRepository.findByCpfCnpjOrEmail(dto.cpfCnpj(), dto.email());
 
-        if (walletDb.isPresent()) {
+        if (walletByCpfCnpjOrEmailAlreadyExists.isPresent()) {
             throw new WallerDataAlreadyExistsException("CpfCnpj or Email already exists");
         }
 
