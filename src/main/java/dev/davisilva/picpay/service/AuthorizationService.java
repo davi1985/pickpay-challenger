@@ -6,6 +6,8 @@ import dev.davisilva.picpay.exception.PickPayException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class AuthorizationService {
@@ -18,6 +20,6 @@ public class AuthorizationService {
             throw new PickPayException();
         }
 
-        return response.getBody().authorized();
+        return Objects.requireNonNull(response.getBody()).authorized();
     }
 }

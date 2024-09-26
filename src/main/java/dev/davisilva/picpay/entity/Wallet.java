@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Wallet {
 
-
     @Column(name = "balance")
     private BigDecimal balance = BigDecimal.ZERO;
 

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class RestExceptionHandler {
 
     @ExceptionHandler(PickPayException.class)
-    public ProblemDetail handlePickPayException(PickPayException e) {
-        return e.toProblemDetails();
+    public ProblemDetail handlePickPayException(PickPayException exception) {
+        return exception.toProblemDetails();
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -23,6 +23,7 @@ public class RestExceptionHandler {
                 .toList();
 
         var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+
         problemDetail.setTitle("Your request parameter didn't validate.");
         problemDetail.setProperty("invalid-params", fieldsErrors);
 
