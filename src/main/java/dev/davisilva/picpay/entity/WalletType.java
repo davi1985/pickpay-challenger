@@ -2,6 +2,8 @@ package dev.davisilva.picpay.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_wallet_type")
 public class WalletType {
@@ -34,6 +36,22 @@ public class WalletType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WalletType that = (WalletType) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getDescription(), that.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(getId());
+        result = 31 * result + Objects.hashCode(getDescription());
+        return result;
     }
 
     public enum Enum {

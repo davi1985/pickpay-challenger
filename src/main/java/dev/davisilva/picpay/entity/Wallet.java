@@ -9,6 +9,9 @@ import java.math.BigDecimal;
 public class Wallet {
 
 
+    @Column(name = "balance")
+    private BigDecimal balance = BigDecimal.ZERO;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,9 +32,6 @@ public class Wallet {
     @JoinColumn(name = "wallet_type_id")
     private WalletType walletType;
 
-    @Column(name = "balance")
-    private BigDecimal balance = BigDecimal.ZERO;
-
     public Wallet() {
     }
 
@@ -41,6 +41,22 @@ public class Wallet {
         this.email = email;
         this.password = password;
         this.walletType = walletType;
+    }
+
+    public boolean isTransferAllowedForWalledType() {
+        return this.walletType.equals(WalletType.Enum.USER.get());
+    }
+
+    public boolean isBalancerEqualOrGreaterThan(BigDecimal value) {
+        return this.balance.doubleValue() > value.doubleValue();
+    }
+
+    public void debit(BigDecimal value) {
+        this.balance = this.balance.subtract(value);
+    }
+
+    public void credit(BigDecimal value) {
+        this.balance = this.balance.add(value);
     }
 
     public Long getId() {

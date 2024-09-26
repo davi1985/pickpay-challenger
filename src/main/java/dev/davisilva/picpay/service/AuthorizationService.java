@@ -1,7 +1,7 @@
 package dev.davisilva.picpay.service;
 
 import dev.davisilva.picpay.client.AuthorizationClient;
-import dev.davisilva.picpay.entity.Transfer;
+import dev.davisilva.picpay.controller.dto.TransferDTO;
 import dev.davisilva.picpay.exception.PickPayException;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ public class AuthorizationService {
         this.authorizationClient = authorizationClient;
     }
 
-    public boolean isAuthorized(Transfer transfer) {
+    public boolean isAuthorized(TransferDTO transfer) {
         var response = authorizationClient.isAuthorized();
 
-        if (response.getStatusCode().isError() || response.getBody() == null) {
+        if (response.getStatusCode().isError()) {
             throw new PickPayException();
         }
 
