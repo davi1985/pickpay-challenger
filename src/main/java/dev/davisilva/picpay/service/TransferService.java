@@ -10,27 +10,19 @@ import dev.davisilva.picpay.exception.WalletNotFoundException;
 import dev.davisilva.picpay.repository.TransferRepository;
 import dev.davisilva.picpay.repository.WalletRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@RequiredArgsConstructor
 public class TransferService {
 
     private final AuthorizationService authorizationService;
     private final NotificationService notificationService;
     private final TransferRepository transferRepository;
     private final WalletRepository walletRepository;
-
-    public TransferService(AuthorizationService authorizationService,
-                           NotificationService notificationService,
-                           TransferRepository transferRepository,
-                           WalletRepository walletRepository) {
-        this.authorizationService = authorizationService;
-        this.notificationService = notificationService;
-        this.transferRepository = transferRepository;
-        this.walletRepository = walletRepository;
-    }
 
     @Transactional
     public Transfer transfer(TransferDTO transferDTO) {

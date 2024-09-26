@@ -1,15 +1,15 @@
 package dev.davisilva.picpay.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 
+@Getter
+@AllArgsConstructor
 public class WalletNotFoundException extends PickPayException {
 
     private final Long walletId;
-
-    public WalletNotFoundException(Long walletId) {
-        this.walletId = walletId;
-    }
 
     @Override
     public ProblemDetail toProblemDetails() {
